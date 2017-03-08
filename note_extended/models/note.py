@@ -15,23 +15,6 @@ class Stage(models.Model):
             help='Restores a note if it was archived by the stage'
             )
 
-    @api.multi
-    def write(self, values):
-        for record in self:
-            ref = super(Stage, record).write(values)
-            if ref:
-                NoteNote = self.env['note.note']
-                if record.auto_close:
-                    notes = NoteNote.search([('stage_id', '=', record.id)])
-                    for note in notes:
-                        note.auto_close()
-                elif record.reverse_auto_close:
-                    notes = NoteNote.search([('stage_id', '=', record.id), ('auto_closed_stage_id', '!=', False)])
-                    for note in notes:
-                        note.auto_open()
-        return True
-
-
 class Note(models.Model):
     _inherit = 'note.note'
 
