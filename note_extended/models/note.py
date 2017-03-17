@@ -15,10 +15,18 @@ class Stage(models.Model):
             help='Restores a note if it was archived by the stage'
             )
 
+
 class Note(models.Model):
     _inherit = 'note.note'
 
     auto_closed_stage_id = fields.Many2one(comodel_name='note.stage')
+
+    related_note_ids = fields.Many2many(
+            comodel_name='note.note',
+            relation='rel_related_note_note',
+            column1='note_id',
+            column2='related_note_id'
+    )
 
     @api.multi
     def auto_close(self):
@@ -36,11 +44,27 @@ class Note(models.Model):
     def write(self, values):
         for record in self:
             ref = super(Note, record).write(values)
-            if ref and 'stage_id' in values:
+            if not ref:
+                return False
+
+            if 'stage_id' in values:
                 stage = record.stage_id
                 auto_close_stage = record.auto_closed_stage_id
                 if stage.auto_close and record.open:
                     record.auto_close()
                 elif auto_close_stage and auto_close_stage.reverse_auto_close and not record.open:
                     record.auto_open()
+
+            # Adds this node (record) as related in his related notes
+            for note in record.related_note_ids:
+                if record not in note.related_note_ids:
+                    note.write({
+                        'related_note_ids': [(4, record.id)]
+                    })
+
+            # Removes other notes that have this as related
+            self.search([(record.id, 'in', 'related_note_ids')]).write({
+                'related_note_ids': [(3, record.id)]
+                })
+
         return True
