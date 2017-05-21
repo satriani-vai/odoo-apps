@@ -6,7 +6,7 @@
     'summary': 'Auto archive notes',
     'author': 'Hugo Rodrigues',
     'website': 'https://hugorodrigues.net',
-    'license': 'LGPL-3',
+    'license': 'Other OSI approved licence',
     'category': 'Tools',
     'depends': [
         'note',
