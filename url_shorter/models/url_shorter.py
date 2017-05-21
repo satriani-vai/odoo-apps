@@ -12,19 +12,11 @@ class UrlShorter(models.Model):
         ('token_uniq', 'uniqe(token)', 'Token must be unique!')
         ]
 
-    def _default_token(self):
-        """Generates a new, non-existing, token"""
-        while True:
-            token = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(11))
-            if self.search_count([('token', '=', token)]) == 0:
-                break
-        return token
-
     name = fields.Char()
 
     token = fields.Char(
         required=True,
-        default=_default_token
+        default=lambda self: self._generate_token()
         )
 
     long_url = fields.Char(
@@ -63,7 +55,7 @@ class UrlShorter(models.Model):
     @api.onchange('token')
     def _onchange_token(self):
         if not self.token:
-            self.token = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(11))
+            self.token = self._generate_token()
 
     @api.model
     def create(self, vals):
@@ -78,3 +70,29 @@ class UrlShorter(models.Model):
             if not record.name:
                 record.write({'name': record.token})
         return True
+
+    @api.multi
+    def action_new_token(self):
+        for record in self:
+            record.write({
+                'token': self._generate_token()
+                })
+        return True
+
+    @api.multi
+    def toggle_active(self):
+        for record in self:
+            record.write({
+                'active': not record.active
+                })
+        return True
+
+    def _generate_token(self):
+        domain = []
+        if self.token:
+            domain = [('token', '!=', self.token)]
+        while True:
+            token = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(11))
+            if self.search_count([('token', '=', token)] + domain) == 0:
+                break
+        return token

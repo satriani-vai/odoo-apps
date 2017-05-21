@@ -5,7 +5,7 @@
     "name": "URL Shorter",
     "summary": "Convert long URLs to shorter ones",
     "version": "10.0.1.0.0",
-    "category": "Uncategorized",
+    "category": "Tools",
     "website": "https://hugorodrigues.net",
     "author": "Hugo Rodrigues",
     "license": "Other OSI approved licence",
