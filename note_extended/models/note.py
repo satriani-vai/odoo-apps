@@ -43,6 +43,7 @@ class Note(models.Model):
     @api.multi
     def write(self, values):
         for record in self:
+            old_related = self.related_note_ids
             ref = super(Note, record).write(values)
             if not ref:
                 return False
@@ -63,8 +64,8 @@ class Note(models.Model):
                     })
 
             # Removes other notes that have this as related
-            self.search([(record.id, 'in', 'related_note_ids')]).write({
-                'related_note_ids': [(3, record.id)]
-                })
+            for note in old_related:
+                if note not in self.related_note_ids:
+                    note.write({'related_note_ids': [(3, record.id)]})
 
         return True
