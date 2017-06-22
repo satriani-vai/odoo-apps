@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 from werkzeug.exceptions import NotFound
 from werkzeug.utils import redirect
 
-from odoo import http
+from odoo import http, fields
 
 
 class UrlShorterController(http.Controller):
@@ -11,11 +13,13 @@ class UrlShorterController(http.Controller):
     def shorter(sefl, token, **kw):
         # Needs sudo to be able to read and write due to ir.rule
         UrlShort = http.request.env['url.shorter'].sudo()
+        UrlRedirect = http.request.env['url.shorter.redirect'].sudo()
         short = UrlShort.search([('token', '=', token), ('active', '=', True)], limit=1)
         if short:
-            short.write({
-                'redirect_number': short.redirect_number + 1
-                })
+            UrlRedirect.create({
+                'url_shorter_id': short.id,
+                'accessed': fields.Datetime.to_string(datetime.datetime.now())
+            })
             return redirect(short.long_url)
         else:
             raise NotFound()

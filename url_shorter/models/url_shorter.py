@@ -30,10 +30,14 @@ class UrlShorter(models.Model):
         )
 
     redirect_number = fields.Integer(
-        readonly=True,
-        default=0,
-        string='Number of redirects'
+        string='Redirects',
+        compute='_compute_redirect_number'
         )
+
+    redirect_ids = fields.One2many(
+        comodel_name='url.shorter.redirect',
+        inverse_name='url_shorter_id'
+    )
 
     active = fields.Boolean(
         default=True
@@ -52,6 +56,13 @@ class UrlShorter(models.Model):
         for record in self:
             record.short_url = '%s/s/%s' % (base_url, record.token)
 
+    @api.multi
+    @api.depends('redirect_ids')
+    def _compute_redirect_number(self):
+        """Computes number of redirects"""
+        for record in self:
+            record.redirect_number = len(record.redirect_ids)
+
     @api.onchange('token')
     def _onchange_token(self):
         if not self.token:
@@ -59,7 +70,7 @@ class UrlShorter(models.Model):
 
     @api.model
     def create(self, vals):
-        if 'name' not in vals:
+        if 'name' not in vals or len(vals['name']) == 0:
             vals['name'] = vals['token']
         return super(UrlShorter, self).create(vals)
 
@@ -67,7 +78,7 @@ class UrlShorter(models.Model):
     def write(self, vals):
         super(UrlShorter, self).write(vals)
         for record in self:
-            if not record.name:
+            if len(record.name) == 0:
                 record.write({'name': record.token})
         return True
 
@@ -96,3 +107,23 @@ class UrlShorter(models.Model):
             if self.search_count([('token', '=', token)] + domain) == 0:
                 break
         return token
+
+class Redirects(models.Model):
+    _name = 'url.shorter.redirect'
+    _order = 'accessed desc'
+
+    url_shorter_id = fields.Many2one(
+        comodel_name='url.shorter',
+        string='Shorted URL',
+        readonly=True
+    )
+
+    country_id = fields.Many2one(
+        comodel_name='res.country',
+        string='Source country',
+        readonly=True
+    )
+
+    accessed = fields.Datetime(
+        readonly=True
+    )
