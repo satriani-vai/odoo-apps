@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Notes Extended',
-    'version': '10.0.0.2',
+    'version': '10.0.1.0',
     'description': """Adds extra functionality to Odoo Notes""",
     'summary': 'Auto archive notes',
     'author': 'Hugo Rodrigues',

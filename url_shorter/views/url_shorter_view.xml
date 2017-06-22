@@ -49,7 +49,17 @@
             </form>
         </field>
     </record>
-    
+
+    <record id="url_shorter_search" model="ir.ui.view">
+        <field name="name">url.short.form</field>
+        <field name="model">url.shorter</field>
+        <field name="arch" type="xml">
+            <search string="URLs">
+                <filter string="Archived" domain="[('active', '=', False)]" />
+            </search>
+        </field>
+    </record>
+
     <record id="url_shorter_action" model="ir.actions.act_window">
         <field name="name">URL Shorter</field>
         <field name="res_model">url.shorter</field>

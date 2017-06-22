@@ -9,7 +9,7 @@
     "website": "https://hugorodrigues.net",
     "author": "Hugo Rodrigues",
     "license": "Other OSI approved licence",
-    "application": False,
+    "application": True,
     "installable": True,
     "dependes": [
         "base"
