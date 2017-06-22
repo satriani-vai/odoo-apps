@@ -19,6 +19,20 @@
         </field>
     </record>
     
+    <record id="url_shorter_redirection_search" model="ir.ui.view">
+        <field name="name">url.short.redirection.search</field>
+        <field name="model">url.shorter.redirect</field>
+        <field name="arch" type="xml">
+            <search string="URL Redirection">
+                <field name="country_id" />
+                <field name="accessed" />
+                <group expand="0" string="Group By...">
+                    <filter string="Country" context="{'group_by': 'country_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+    
     <record id="url_shorter_tree" model="ir.ui.view">
         <field name="name">url.short.tree</field>
         <field name="model">url.shorter</field>
@@ -73,10 +87,13 @@
     </record>
 
     <record id="url_shorter_search" model="ir.ui.view">
-        <field name="name">url.short.form</field>
+        <field name="name">url.short.search</field>
         <field name="model">url.shorter</field>
         <field name="arch" type="xml">
             <search string="URLs">
+                <field name="name" />
+                <field name="short_url" />
+                <field name="long_url" />
                 <filter string="Archived" domain="[('active', '=', False)]" />
             </search>
         </field>
