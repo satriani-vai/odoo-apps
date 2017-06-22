@@ -107,6 +107,13 @@ class UrlShorter(models.Model):
             'active': True
             })
 
+    @api.multi
+    def archive_expired(self):
+        today = fields.Date.to_string(datetime.date.today())
+        self.search([('expiration_date', '<', today), ('active', '=', True)]).write({'active': False})
+        return True
+
+
     def _generate_token(self):
         domain = []
         if self.token:

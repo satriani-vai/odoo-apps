@@ -18,7 +18,8 @@
         "views/url_shorter_view.xml",
         "security/ir.model.access.csv",
         "security/security.xml",
-        "data/action_rule.xml"
+        "data/action_rule.xml",
+        "data/cron.xml"
         ],
     'external_dependencies' : { 
         'python' : ['geoip'],
