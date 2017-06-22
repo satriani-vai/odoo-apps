@@ -15,6 +15,8 @@
         "base"
     ],
     "data": [
-        "views/url_shorter_view.xml"
+        "views/url_shorter_view.xml",
+        "security/ir.model.access.csv",
+        "security/security.xml"
     ]
 }

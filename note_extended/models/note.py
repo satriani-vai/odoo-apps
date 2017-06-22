@@ -63,7 +63,7 @@ class Note(models.Model):
                         'related_note_ids': [(4, record.id)]
                     })
 
-            # Removes other notes that have this as related
+            # Removes other notes that had this as related
             for note in old_related:
                 if note not in self.related_note_ids:
                     note.write({'related_note_ids': [(3, record.id)]})
