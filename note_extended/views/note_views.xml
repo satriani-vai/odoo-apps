@@ -36,7 +36,8 @@
         <field name="inherit_id" ref="note.view_note_note_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='memo']" position="after">
-                <field name="related_note_ids" widget="many2many_tags" domain="[('user_id', '=', uid)]"
+                <field name="related_note_ids" widget="many2many_tags"
+                    domain="[('user_id', '=', uid), ('id', '!=', active_id)]"
                     placeholder="Related notes" />
             </xpath>
         </field>
