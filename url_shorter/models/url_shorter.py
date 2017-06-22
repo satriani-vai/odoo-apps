@@ -3,6 +3,8 @@ import string
 import random
 import datetime
 
+from geoip import geolite2
+
 from odoo import models, api, fields
 
 
@@ -94,9 +96,16 @@ class UrlShorter(models.Model):
     def toggle_active(self):
         for record in self:
             record.write({
-                'active': not record.active
-                })
+                'active': not record.active,
+            })
         return True
+
+    @api.multi
+    def renew(self):
+        return self.write({
+            'expiration_date': datetime.datetime.now() + datetime.timedelta(days=7),
+            'active': True
+            })
 
     def _generate_token(self):
         domain = []
@@ -124,6 +133,19 @@ class Redirects(models.Model):
         readonly=True
     )
 
+    source_ip = fields.Char(
+        readonly=True
+    )
+
     accessed = fields.Datetime(
         readonly=True
     )
+
+    @api.multi
+    def map_ip(self):
+        for record in self:
+            match = geolite2.lookup(record.source_ip)
+            if match:
+                country = self.env['res.country'].search([('code', '=', match.country)], limit=1)
+                if country:
+                    record.write({'country_id': country.id})

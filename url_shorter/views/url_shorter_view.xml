@@ -38,7 +38,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_new_token" type="object" string="Generate new token" />
+                    <button name="action_new_token" type="object" string="Generate new token" attrs="{'invisible': [('active', '=', False)]}" />
+                    <button name="renew" type="object" string="Renew"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -60,7 +61,7 @@
                             <field name="token" />
                         </group>
                         <group>
-                            <field name="expiration_date" />
+                            <field name="expiration_date" attrs="{'invisible': [('active', '=', False)]}" />
                         </group>
                     </group>
                     <group>

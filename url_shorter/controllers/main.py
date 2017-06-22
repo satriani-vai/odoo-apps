@@ -18,7 +18,8 @@ class UrlShorterController(http.Controller):
         if short:
             UrlRedirect.create({
                 'url_shorter_id': short.id,
-                'accessed': fields.Datetime.to_string(datetime.datetime.now())
+                'accessed': fields.Datetime.to_string(datetime.datetime.now()),
+                'source_ip': http.request.httprequest.environ['REMOTE_ADDR']
             })
             return redirect(short.long_url)
         else:

@@ -11,12 +11,16 @@
     "license": "Other OSI approved licence",
     "application": True,
     "installable": True,
-    "dependes": [
-        "base"
-    ],
+    "depends": [
+        "base_action_rule"
+        ],
     "data": [
         "views/url_shorter_view.xml",
         "security/ir.model.access.csv",
-        "security/security.xml"
-    ]
+        "security/security.xml",
+        "data/action_rule.xml"
+        ],
+    'external_dependencies' : { 
+        'python' : ['geoip'],
+        }
 }
