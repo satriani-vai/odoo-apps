@@ -105,8 +105,7 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('create_uid', '=', uid)]</field>
-        <field name="web_icon">url_shorter,static/description/icon.png</field>
     </record>
 
-    <menuitem name="URL Shorter" id="menu_url_shorter" action="url_shorter_action" />
+    <menuitem name="URL Shorter" web_icon="url_shorter,static/description/icon.png" id="menu_url_shorter" action="url_shorter_action" />
 </odoo>

@@ -3,7 +3,10 @@ import string
 import random
 import datetime
 
-from geoip import geolite2
+try:
+    from geoip import geolite2
+except ImportError:
+    geolite2 = False
 
 from odoo import models, api, fields
 
@@ -72,7 +75,7 @@ class UrlShorter(models.Model):
 
     @api.model
     def create(self, vals):
-        if 'name' not in vals or len(vals['name']) == 0:
+        if 'name' not in vals or not vals['name']:
             vals['name'] = vals['token']
         return super(UrlShorter, self).create(vals)
 
@@ -150,9 +153,10 @@ class Redirects(models.Model):
 
     @api.multi
     def map_ip(self):
-        for record in self:
-            match = geolite2.lookup(record.source_ip)
-            if match:
-                country = self.env['res.country'].search([('code', '=', match.country)], limit=1)
-                if country:
-                    record.write({'country_id': country.id})
+        if geolite2:
+            for record in self:
+                match = geolite2.lookup(record.source_ip)
+                if match:
+                    country = self.env['res.country'].search([('code', '=', match.country)], limit=1)
+                    if country:
+                        record.write({'country_id': country.id})
