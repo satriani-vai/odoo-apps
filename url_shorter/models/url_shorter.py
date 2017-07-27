@@ -5,7 +5,8 @@ import datetime
 
 try:
     from geoip import geolite2
-except ImportError:
+    geolite2.lookup('127.0.0.1') # Check if lookup is available
+except (ImportError, RuntimeError):
     geolite2 = False
 
 from odoo import models, api, fields
