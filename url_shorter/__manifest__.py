@@ -20,8 +20,5 @@
         "security/security.xml",
         "data/action_rule.xml",
         "data/cron.xml"
-        ],
-    'external_dependencies' : { 
-        'python' : ['geoip'],
-        }
+        ]
 }
