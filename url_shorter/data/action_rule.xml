@@ -6,7 +6,7 @@
         <field name="condition">True</field>
         <field name="type">ir.actions.server</field>
         <field name="state">code</field>
-        <field name="code">record.map_ip()</field>
+        <field name="code">object.map_ip()</field>
     </record>
     <record id="redirect_map_ip" model="base.action.rule">
         <field name="name">Map redirect country</field>

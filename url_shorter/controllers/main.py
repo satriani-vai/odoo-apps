@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
-import datetime
-
 from werkzeug.exceptions import NotFound
 from werkzeug.utils import redirect
 
-from odoo import http, fields
+from openerp import http, fields
 
 
 class UrlShorterController(http.Controller):
     
     @http.route('/s/<string:token>', type='http', auth='public')
-    def shorter(sefl, token, **kw):
+    def shorter(self, token, **kw):
         # Needs sudo to be able to read and write due to ir.rule
         UrlShort = http.request.env['url.shorter'].sudo()
         UrlRedirect = http.request.env['url.shorter.redirect'].sudo()
@@ -18,7 +16,7 @@ class UrlShorterController(http.Controller):
         if short:
             UrlRedirect.create({
                 'url_shorter_id': short.id,
-                'accessed': fields.Datetime.to_string(datetime.datetime.now()),
+                'accessed': fields.datetime.now(),
                 'source_ip': http.request.httprequest.environ['REMOTE_ADDR']
             })
             return redirect(short.long_url)

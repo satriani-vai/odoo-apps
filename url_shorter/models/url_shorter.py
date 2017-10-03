@@ -9,7 +9,7 @@ try:
 except (ImportError, RuntimeError):
     geolite2 = False
 
-from odoo import models, api, fields
+from openerp import models, api, fields
 
 
 class UrlShorter(models.Model):
@@ -111,7 +111,7 @@ class UrlShorter(models.Model):
             'active': True
             })
 
-    @api.multi
+    @api.model
     def archive_expired(self):
         today = fields.Date.to_string(datetime.date.today())
         self.search([('expiration_date', '<', today), ('active', '=', True)]).write({'active': False})
