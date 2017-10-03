@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
+from openerp import models, fields, api
 
 
 class Stage(models.Model):
@@ -31,14 +31,19 @@ class Note(models.Model):
     @api.multi
     def auto_close(self):
         for record in self:
-            record.action_close()
-            record.write({'auto_closed_stage_id': record.stage_id.id})
+            record.write({
+                'auto_closed_stage_id': record.stage_id.id,
+                'open': False,
+                'date_done': fields.date.today()
+                })
 
     @api.multi
     def auto_open(self):
         for record in self:
-            record.action_open()
-            record.write({'auto_closed_stage_id': None})
+            record.write({
+                'auto_closed_stage_id': None,
+                'open': True
+                })
 
     @api.multi
     def write(self, values):
