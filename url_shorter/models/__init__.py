@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-import url_shorter
+from . import url_shorter
