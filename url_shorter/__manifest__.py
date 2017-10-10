@@ -4,7 +4,7 @@
 {
     "name": "URL Shorter",
     "summary": "Convert long URLs to shorter ones",
-    "version": "1.0.0",
+    "version": "11.0.1.0.0",
     "category": "Tools",
     "website": "https://hugorodrigues.net",
     "author": "Hugo Rodrigues",
