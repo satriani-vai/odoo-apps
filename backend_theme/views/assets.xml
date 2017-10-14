@@ -9,14 +9,17 @@
 -->
 
 <odoo>
-    <data>
-	<template id="assets_backend" name="Backend Theme" inherit_id="web.assets_backend">
-    	    <xpath expr=".">
-		<link rel="stylesheet" href="/backend_theme/static/src/less/drawer.less"/>
-		<link rel="stylesheet" href="/backend_theme/static/src/less/variables.less"/>
-		<link rel="stylesheet" href="/backend_theme/static/src/less/bootswatch.less"/>
-		<link rel="stylesheet" href="/backend_theme/static/src/less/style.less"/>
+    <template id="assets_backend" name="Backend Theme"
+        inherit_id="web.assets_backend">
+    	<xpath expr=".">
+            <link rel="stylesheet"
+                href="/backend_theme/static/src/less/drawer.less"/>
+            <link rel="stylesheet"
+                href="/backend_theme/static/src/less/variables.less"/>
+            <link rel="stylesheet"
+                href="/backend_theme/static/src/less/bootswatch.less"/>
+            <link rel="stylesheet"
+                href="/backend_theme/static/src/less/style.less"/>
 	    </xpath>
 	</template>
-    </data>
 </odoo>
