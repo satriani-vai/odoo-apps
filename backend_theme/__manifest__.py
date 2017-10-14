@@ -4,6 +4,8 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 # pylint: disable=pointless-statement
 # pylint: disable=missing-docstring
+# pylint: disable=manifest-required-author
+# pylint: disable=manifest-version-format
 
 {
     "name": "Material/United Backend Theme",
