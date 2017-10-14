@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Module information"""
 # Copyright 2016, 2017 Openworx
 # Copyright 2017 Hugo Rodrigues
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 # pylint: disable=pointless-statement
+# pylint: disable=missing-docstring
 
 {
     "name": "Material/United Backend Theme",
