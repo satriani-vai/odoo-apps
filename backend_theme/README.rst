@@ -7,7 +7,7 @@ backend_theme
 ==============
 
 This module ads a enterprise feel to Odoo Community.
-Original work by .. Openworx :target: https://github.com/Openworx/backend_theme
+Original work by https://github.com/Openworx/backend_theme
 On top of the original theme, this fork allows to set a custom background per
 company and per user, if the company settings allows that.
 It also allows to change the color of the bar per company
