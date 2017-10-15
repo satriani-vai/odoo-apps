@@ -11,9 +11,6 @@
     "version": "11.0.1.0.0",
     "category": "Themes/Backend",
     "website": "https://hugorodrigues.net",
-    "description": """
-        Backend theme for Odoo 11.0 community edition.
-        """,
     "images": [
         "images/screen.png"
     ],
