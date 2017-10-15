@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
 """Return background image"""
-from odoo.http import Controller, request, route
+
+import base64
+
 from werkzeug.utils import redirect
+from odoo.http import Controller, request, route
+
+
+DEFAULT_IMAGE_PATH = '/backend_theme/static/src/img/material-background.jpg'
 
 
 class DasboardBackground(Controller):
@@ -12,7 +18,11 @@ class DasboardBackground(Controller):
         """Redirects to the background image"""
         user = request.env.user
         company = user.company_id
-        if company.background_allow_user and user.background_image:
-            pass
+        if company.background_allow_users:  # and user.background_image:
+            return redirect(DEFAULT_IMAGE_PATH)
+        elif company.background_image:
+            image = base64.b64decode(company.background_image)
         else:
-            pass
+            return redirect(DEFAULT_IMAGE_PATH)
+
+        return request.make_response(image, [('Content-Type', 'image')])
