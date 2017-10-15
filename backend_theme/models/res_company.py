@@ -9,7 +9,11 @@ class ResCompany(models.Model):
 
     _inherit = 'res.company'
 
-    background_image = fields.Binary(attachment=True)
+    background_image = fields.Binary(
+        attachment=True,
+        required=True,
+        default=''
+    )
 
     background_allow_users = fields.Boolean(
         string="Allow users to set custom background images"
