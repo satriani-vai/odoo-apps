@@ -23,8 +23,6 @@ On the same tab, it's possible to select the color scheme to use.
 Known issues / Roadmap
 ======================
 
-* Add custom background image per company
-* Add custom background image per user
 * Use custom color schemes
 
 Bug Tracker
