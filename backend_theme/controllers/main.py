@@ -18,8 +18,8 @@ class DasboardBackground(Controller):
         """Redirects to the background image"""
         user = request.env.user
         company = user.company_id
-        if company.background_allow_users:  # and user.background_image:
-            return redirect(DEFAULT_IMAGE_PATH)
+        if company.background_allow_users and user.background_image:
+            image = base64.b64decode(user.background_image)
         elif company.background_image:
             image = base64.b64decode(company.background_image)
         else:

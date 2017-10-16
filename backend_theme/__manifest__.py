@@ -21,10 +21,12 @@
         'web_responsive',
     ],
     "excludes": [
-        'web_enterprise'
+        'web_enterprise',
+        'backend_theme_v11'
     ],
     "data": [
         'views/assets.xml',
         'views/res_company_view.xml',
+        'views/res_users_view.xml',
     ],
 }
