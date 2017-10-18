@@ -2,9 +2,9 @@
    :target: https://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
-==============
-backend_theme
-==============
+================
+enterprise_theme
+================
 
 This module ads a enterprise feel to Odoo Community.
 Original work by https://github.com/Openworx/backend_theme

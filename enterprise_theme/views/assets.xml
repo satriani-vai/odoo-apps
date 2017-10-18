@@ -13,13 +13,13 @@
         inherit_id="web.assets_backend">
         <xpath expr=".">
             <link rel="stylesheet"
-                href="/backend_theme/static/src/less/drawer.less"/>
+                href="/enterprise_theme/static/src/less/drawer.less"/>
             <link rel="stylesheet"
-                href="/backend_theme/static/src/less/variables.less"/>
+                href="/enterprise_theme/static/src/less/variables.less"/>
             <link rel="stylesheet"
-                href="/backend_theme/static/src/less/bootswatch.less"/>
+                href="/enterprise_theme/static/src/less/bootswatch.less"/>
             <link rel="stylesheet"
-                href="/backend_theme/static/src/less/style.less"/>
+                href="/enterprise_theme/static/src/less/style.less"/>
         </xpath>
     </template>
 </odoo>
