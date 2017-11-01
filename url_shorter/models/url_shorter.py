@@ -15,7 +15,7 @@ from openerp import models, api, fields
 class UrlShorter(models.Model):
     _name = 'url.shorter'
     _sql_constraints = [
-        ('token_uniq', 'uniqe(token)', 'Token must be unique!')
+        ('token_uniq', 'unique(token)', 'Token must be unique!')
         ]
 
     name = fields.Char()
